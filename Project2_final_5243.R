@@ -103,7 +103,9 @@ server <- function(input, output) {
     data <- data_df
     if(input$weekend) {
       # Filter for weekends
-      data <- data %>% mutate(weekday = weekdays(DeclarationDate)) %>%
+      data <- data %>% 
+        mutate(DeclarationDate = as.Date(DeclarationDate, format = "%Y-%m-%d")) %>%
+        mutate(weekday = weekdays(DeclarationDate)) %>%
         filter(weekday %in% c('Saturday', 'Sunday'))
     }
     
